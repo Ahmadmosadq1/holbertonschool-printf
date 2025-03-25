@@ -44,7 +44,7 @@ int _printf(const char *format, ...)
 
 		if (format[i] == '%' && format[i + 1] == '%')
 		{
-			write(1, "%", 1);
+			write(1, &format[i], 1);
 			printed++;
 			i += 2;
 			continue;
@@ -54,6 +54,7 @@ int _printf(const char *format, ...)
         	printed++;
         	i++;
     }
+	write(1, "\n", 1);
 	va_end(arg);
    	return(printed);
 }
