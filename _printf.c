@@ -54,8 +54,6 @@ int _printf(const char *format, ...)
 			printed++;
         	i++;
     }
-	if(write(1, "\n", 1))
-		printed++;
 	va_end(arg);
    	return(printed);
 }
