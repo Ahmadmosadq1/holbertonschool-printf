@@ -41,6 +41,7 @@ int _printf(const char *format, ...)
         {
             write(1, "%", 1); /*write '%' to stdout*/
             printed++; /*increment the printed character counter*/
+	    continue;
         }
         write(1, &format[i], 1); /*print regular characters*/
         printed++;
