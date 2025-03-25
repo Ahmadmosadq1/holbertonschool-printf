@@ -49,15 +49,8 @@ int _printf(const char *format, ...)
 			i += 2;
 			continue;
 		}
-
-		if(format[i] =='%' && format[i+1] == '\0')
-		{
-			write(1, "%", 1);
-			printed++;
-			i++;
-			continue;
-		}
-	       	write(1, &format[i], 1);
+		writ(1, "%", 1)
+		write(1, &format[i], 1);
         	printed++;
         	i++;
     }
