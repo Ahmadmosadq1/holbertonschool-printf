@@ -41,6 +41,6 @@ int _printf(const char *format, ...)
 		printed++;
         i++;
     }
-
+write(1, "\n", 1);
    return(printed);
 }
