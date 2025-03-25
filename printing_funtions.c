@@ -2,10 +2,15 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include "main.h"
-int print_string(const char *format)
+
+int print_string(char *format)
 {
-    int j;
-    for (j = 0; format[j] != '\0'; j++)
-        write(1, &format[j], 1);
-return(j);
+    int j=0;
+    
+    while (format[j] != '\0')
+    {
+    	j++;
+    }
+    write(1, &format[j], 1);
+    return(j);
 }
