@@ -37,10 +37,19 @@ int _printf(const char *format, ...)
             i = i + 2;
             continue;
         }
-        if(write (1, &format[i], 1))/* in case if %%, it will print it normally*/
-		printed++;
+
+	 if(format[i] == '%' && format[i+1] =='%') /* check for '%%'*/
+        {
+                write(1, '%', 1); /* write '%' to stdout*/
+                printed++; /*increment the printed character counter */
+                i+=2; /*skip '%%' int the format strind*/
+                continue; /*move to the next character*/
+        }
+        write(1, &format[i], 1); /*print regular characters*/
+        printed++;
         i++;
     }
 
+   va_end(arg);/* clean up the argumnt list*/
    return(printed);
 }
