@@ -11,6 +11,6 @@ int print_string(char *format)
     {
     	j++;
     }
-    write(1, &format[j], 1);
+    write(1, format, j);
     return(j);
 }
