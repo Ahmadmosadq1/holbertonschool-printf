@@ -49,7 +49,7 @@ int _printf(const char *format, ...)
 			i += 2;
 			continue;
 		}
-		write(1, "%", 1)
+		write(1, "%", 1);
 		write(1, &format[i], 1);
         	printed++;
         	i++;
