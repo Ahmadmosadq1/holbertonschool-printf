@@ -50,8 +50,8 @@ int _printf(const char *format, ...)
 			continue;
 		}
 	
-		write(1, &format[i], 1);
-        	printed++;
+		if(write(1, &format[i], 1))
+			printed++;
         	i++;
     }
 	write(1, "\n", 1);
