@@ -47,6 +47,7 @@ int _printf(const char *format, ...)
 		write(1, "%", 1); /*Prit the '%' character*/
 		printed++;
 		i++;
+		continue;
 	}
         write(1, &format[i], 1); /*print regular characters*/
         printed++;
