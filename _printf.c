@@ -35,13 +35,13 @@ int _printf(const char *format, ...)
             i = i + 2;
             continue;
         }
-	if (format[i] == '%' && format[i+1] == '\0') /*if the format is just '%'*/
-	{
-		write(1, "%", 1); /*Prit the '%' character*/
-		printed++;
-		i++;
-		continue;
-	}
+	if (format[i] == '%' && format[i+1] == '\0' || format[i+1] == '%')
+       {
+            write(1, "%", 1); /*write '%' to stdout*/
+            printed++; /*increment the printed character counter*/
+            i+=2; /*skip "%%" in the format string */
+            continue;
+        }
         write(1, &format[i], 1); /*print regular characters*/
         printed++;
         i++;
