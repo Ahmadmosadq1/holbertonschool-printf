@@ -30,9 +30,10 @@ int print_string(char *format)
  * @i: increment i to skip %c.
  * Return: J
  */
-void print_char(char c, int *i)
+int print_char(char c, int *i)
 {
 	write(1, &c, 1);
 	*i += 2;
+	return (1);
 }
 

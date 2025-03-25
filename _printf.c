@@ -25,7 +25,7 @@ int _printf(const char *format, ...)
 		if (format[i] == '%' && format[i + 1] == 'c')
 		{
 			c = va_arg(arg, int);
-			print_char(c, &i);
+			printed += print_char(c, &i);
 			continue;
 		}
 		if (format[i] == '%' && format[i + 1] == 's')
