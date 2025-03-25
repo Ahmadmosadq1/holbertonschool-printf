@@ -9,10 +9,12 @@ int _printf(const char *format, ...)
   int i = 0;
     char *str;
     va_list arg;
+    int printed = 0;/*to start calculating how many chars printed*/
 
     if (format == NULL)/*checking if format is NULL and terminates if so*/
     {
         write(1, "failed", 6);
+	printed++;
         return (0);
     }
     va_start(arg, format);/*initilizing the varadiac funtion.*/
@@ -22,19 +24,21 @@ int _printf(const char *format, ...)
         {
             char c = va_arg(arg, int); /*assigning ecah arg to c.*/
             write(1, &c, 1 ); /*printing out each charachter*/
+	    printed++;
             i = i + 2 ;/*to skip the (%c) in thr formatt so we dont print them and look for thr next(%)*/
             continue;
         }
         if (format[i] == '%' && format[i + 1] == 's')/* if % is follwed by a S, we will print a string*/
         {
             str = va_arg(arg, char *);
-            print_string(str);/*printing string funtion.*/
+            printed = printed + print_string(str);/*printing string funtion.*/
             i = i + 2;
             continue;
         }
-        write (1, &format[i], 1); /* in case if %%, it will print it normally*/
+        if(write (1, &format[i], 1))/* in case if %%, it will print it normally*/
+		printed++;
         i++;
     }
 
-   return(0);
+   return(printed);
 }
