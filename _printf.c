@@ -31,6 +31,8 @@ int _printf(const char *format, ...)
         if (format[i] == '%' && format[i + 1] == 's')/* if % is follwed by a S, we will print a string*/
         {
             str = va_arg(arg, char *);
+	    if (str == NULL)
+		    str = "(null)";
             printed = printed + print_string(str);/*printing string funtion.*/
             i = i + 2;
             continue;
