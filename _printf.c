@@ -35,7 +35,7 @@ int _printf(const char *format, ...)
             i = i + 2;
             continue;
         }
-	if (format[i] == '%' && format[i+1] == '\0' || format[i+1] == '%')
+	if (format[i] == '%' && (format[i+1] == '\0' || format[i+1] == '%'))
        {
             write(1, "%", 1); /*write '%' to stdout*/
             printed++; /*increment the printed character counter*/
