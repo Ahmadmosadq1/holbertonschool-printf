@@ -9,50 +9,58 @@ int _printf(const char *format, ...)
 	int i = 0;
 	char *str;
 	va_list arg;
-	int printed = 0;/*to start calculating how many chars printed*/
+	int printed = 0;
 
-	if (format == NULL)/*checking if format is NULL and terminates if so*/
-       	{
-	       	return -1;
-	}
-	va_start(arg, format);/*initilizing the varadiac funtion.*/
-	while (format[i]) /*looping through the format string.*/
+	if (format == NULL)
 	{
-		if (format[i] == '%' && format[i + 1] == 'c')/*if % is found and c after it, we can print the char*/
+		return (-1);
+	}
+
+	va_start(arg, format);
+
+	while (format[i])
+	{
+		if (format[i] == '%' && format[i + 1] == 'c')
 		{
-			char c = va_arg(arg, int); /*assigning ecah arg to c.*/
-            		write(1, &c, 1 ); /*printing out each charachter*/
-	    		printed++;
-            		i = i + 2 ;/*to skip the (%c) in thr formatt so we dont print them and look for thr next(%)*/
-            		continue;
+			char c;
+
+			c = va_arg(arg, int);
+			write(1, &c, 1);
+			printed++;
+			i += 2;
+			continue;
 		}
-		if (format[i] == '%' && format[i + 1] == 's')/* if % is follwed by a S, we will print a string*/
+
+		if (format[i] == '%' && format[i + 1] == 's')
 		{
-            		str = va_arg(arg, char *);
-	    		if (str == NULL)
-		    		str = "(null)";
-            		printed = printed + print_string(str);/*printing string funtion.*/
-            		i = i + 2;
-            		continue;
+			str = va_arg(arg, char *);
+
+			if (str == NULL)
+				str = "(null)";
+			printed = printed + print_string(str);
+			i += 2;
+			continue;
 		}
-		if (format[i] == '%' && format[i+1] == '%')
-		{	
-            		write(1, "%", 1); /*write '%' to stdout*/
-            		printed++; /*increment the printed character counter*/
-            		i+=2; /*skip "%%" in the format string */
-            		continue;
+
+		if (format[i] == '%' && format[i + 1] == '%')
+		{
+			write(1, "%", 1);
+			printed++;
+			i += 2;
+			continue;
 		}
-		if (format[i] =='%' && format[i+1] == '\0')
+
+		if(format[i] =='%' && format[i+1] == '\0')
 		{
 			write(1, "%", 1);
 			printed++;
 			i++;
 			continue;
 		}
-	       	write(1, &format[i], 1); /*print regular characters*/
+	       	write(1, &format[i], 1);
         	printed++;
         	i++;
     }
-	va_end(arg); /*clean up the argument list*/
+	va_end(arg);
    	return(printed);
 }
