@@ -42,6 +42,12 @@ int _printf(const char *format, ...)
 	    i+=2; /*skip "%%" in the format string */
 	    continue;
         }
+	if (format[i] == '%' && format[i+1] == '\0') /*if the format is just '%'*/
+	{
+		write(1; '%'; 1); /*Prit the '%' character*/
+		printed++;
+		i++;
+	}
         write(1, &format[i], 1); /*print regular characters*/
         printed++;
         i++;
