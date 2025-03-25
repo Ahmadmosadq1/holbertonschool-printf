@@ -13,9 +13,7 @@ int _printf(const char *format, ...)
 
     if (format == NULL)/*checking if format is NULL and terminates if so*/
     {
-        write(1, "failed", 6);
-	printed++;
-        return (0);
+        return -1;
     }
     va_start(arg, format);/*initilizing the varadiac funtion.*/
     while (format[i]) /*looping through the format string.*/
