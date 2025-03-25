@@ -37,7 +37,7 @@ int _printf(const char *format, ...)
         }
 	if (format[i] == '%' && format[i+1] == '%') /*check for "%%"*/
         {
-            write(1, %"%", 1); /*write '%' to stdout*/
+            write(1, "%%", 1); /*write '%' to stdout*/
             printed++; /*increment the printed character counter*/
 	    i+=2; /*skip "%%" in the format string */
 	    continue;
