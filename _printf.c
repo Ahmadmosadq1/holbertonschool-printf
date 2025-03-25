@@ -44,15 +44,18 @@ int _printf(const char *format, ...)
 
 		if (format[i] == '%' && format[i + 1] == '%')
 		{
-			ret
-			write(1, "%", 1);
+			write(1, &format[i], 1);
 			printed++;
 			i += 2;
 			continue;
 		}
-	
-		if(write(1, &format[i], 1))
+
+		if (format[i] == '%')
+			return(0);
+		else
+		{write(1, &format[i], 1);
 			printed++;
+		}
         	i++;
     }
 	va_end(arg);
