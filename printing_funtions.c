@@ -45,37 +45,41 @@ int print_char(char c, int *i)
 
 int print_number(int n)
 {
-	char numStr[12];
 	int printed = 0;
 	int i = 0;
-	int conv_str;
+	char numStr[12];
+	unsigned int number;
 
 	if (n == 0)
 	{
-		numStr[printed++] = '0';
+		write(1, "0", 1);
+		return (1);
 	}
-
 	else if (n < 0)
 	{
-		numStr[printed++] = '-';
-		n = -n;
+		write(1, "-", 1);
+		printed++;
+		number = -n;
+	}
+	else
+	{
+		number = n;
 	}
 
-	conv_str = n;
+	int temp = number;
 
-	while (conv_str > 0)
+	while (temp > 0)
 	{
-		conv_str /= 10;
+		temp /= 10;
 		printed++;
 	}
 	numStr[printed] = '\0';
 
-	for (i = printed - 1; n > 0; i--)
+	for (i = printed - 1; number > 0; i--)
 	{
-		numStr[i] = (n % 10) + '0';
-		n /= 10;
+		numStr[i] = (number % 10) + '0';
+		number /= 10;
 	}
 	write(1, numStr, printed);
 	return (printed);
 }
-
