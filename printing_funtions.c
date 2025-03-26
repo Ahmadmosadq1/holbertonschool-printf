@@ -45,7 +45,7 @@ int print_char(char c, int *i)
 
 int print_number(int n)
 {
-	char numStr[20];
+	char numStr[12];
 	int printed = 0;
 	int i = 0;
 	int conv_str;
