@@ -37,3 +37,45 @@ int print_char(char c, int *i)
 	return (1);
 }
 
+/**
+ * print_number - Prints an integer as a string.
+ * @n: integer to print it.
+ * Return: total of number of characters printed.
+ */
+
+int print_number(int n)
+{
+	int printed = 0;
+	int i = 0;
+	int j = 0;
+	char numStr[12];
+	unsigned int  number;
+
+	if (n == 0)
+	{
+		write(1, "0", 1);
+		return (1);
+	}
+	if (n < 0)
+	{
+		write(1, "-", 1);
+		printed++;
+		number = (unsigned int)(-n);
+	}
+	else
+	{
+		number = (unsigned int)(n);
+	}
+
+	do {
+		numStr[i++] = (number % 10) + '0';
+		number /= 10;
+		} while (number > 0);
+
+	for (j = i - 1; j >= 0; j--)
+	{
+		write(1, &numStr[j], 1);
+	}
+	printed += i;
+	return (printed);
+}
