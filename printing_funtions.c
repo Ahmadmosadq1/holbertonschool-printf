@@ -49,7 +49,6 @@ int print_number(int n)
 	int i = 0;
 	char numStr[12];
 	unsigned int number;
-	int temp;
 
 	if (n == 0)
 	{
@@ -67,20 +66,12 @@ int print_number(int n)
 		number = n;
 	}
 
-	temp = number;
+	do {
+		numStr[1++] = (number % 10) + '0';
+		nember /= 10;
+	} while (number > 0);
 
-	while (temp > 0)
-	{
-		temp /= 10;
-		printed++;
-	}
-	numStr[printed] = '\0';
-
-	for (i = printed - 1; number > 0; i--)
-	{
-		numStr[i] = (number % 10) + '0';
-		number /= 10;
-	}
-	write(1, numStr, printed);
+	while (i--)
+		write(1, numStr, 1), printed++;
 	return (printed);
 }
