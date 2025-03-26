@@ -56,7 +56,7 @@ int print_number(int n)
 		write(1, "0", 1);
 		return (1);
 	}
-	else if (n < 0)
+	if (n < 0)
 	{
 		write(1, "-", 1);
 		printed++;
