@@ -47,9 +47,9 @@ int print_number(int n)
 {
 	int printed = 0;
 	int i = 0;
+	int j = 0;
 	char numStr[12];
-	int number;
-	int temp;
+	unsigned int  number;
 
 	if (n == 0)
 	{
@@ -60,26 +60,22 @@ int print_number(int n)
 	{
 		write(1, "-", 1);
 		printed++;
-		number = -n;
+		number = (unsigned int)(-n);
 	}
 	else
 	{
-		number = n;
+		number = (unsigned int)(n);
 	}
 
-	temp = number;
-	while (temp > 0)
-	{
-		temp /= 10;
-		printed++;
-	}
-	numStr[printed] = '\0';
-
-	for (i = printed - 1; number > 0; i--)
-	{
-		numStr[i] = (number % 10) + '0';
+	do {
+		numStr[i++] = (number % 10) + '0';
 		number /= 10;
+		} while (number > 0);
+
+	for (j = i - 1; j >= 0; j--)
+	{
+		write(1, &numStr[j], 1);
 	}
-	write(1, numStr, printed);
+	printed += i;
 	return (printed);
 }
