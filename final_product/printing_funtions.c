@@ -9,7 +9,7 @@
  * @format: data type
  * Return: J
  */
-int print_string(char *format)
+int print_string(char *format, int* i)
 {
 	int j = 0;
 
@@ -20,6 +20,7 @@ int print_string(char *format)
 		j++;
 	}
 	write(1, format, j);
+	*i += 2;
 	return (j);
 }
 /**
@@ -43,10 +44,10 @@ int print_char(char c, int *i)
  * Return: total of number of characters printed.
  */
 
-int print_number(int n)
+int print_number(int n, int* i)
 {
 	int printed = 0;
-	int i = 0;
+	int z = 0;
 	int j = 0;
 	char numStr[12];
 	unsigned int  number;
@@ -68,14 +69,15 @@ int print_number(int n)
 	}
 
 	do {
-		numStr[i++] = (number % 10) + '0';
+		numStr[z++] = (number % 10) + '0';
 		number /= 10;
 		} while (number > 0);
-
-	for (j = i - 1; j >= 0; j--)
+	
+	while (z--)
 	{
-		write(1, &numStr[j], 1);
+		write(1, &numStr[z], 1);
+		printed += j;
 	}
-	printed += i;
+	*i += 2;
 	return (printed);
 }

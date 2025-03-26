@@ -26,8 +26,7 @@ int _printf(const char *format, ...)
 		}
 		if (format[i] == '%' && format[i + 1] == 's')
 		{
-			printed = printed + print_string(va_arg(arg, char *));
-			i += 2;
+			printed = printed + print_string(va_arg(arg, char *), &i);
 			continue;
 		}
 		if (format[i] == '%' && format[i + 1] == '%')
@@ -39,8 +38,7 @@ int _printf(const char *format, ...)
 		}
 		if (format[i] == '%' && (format[i + 1] == 'd' || format[i + 1] == 'i'))
 		{
-			printed += print_number(va_arg(arg, int));
-			i += 2;
+			printed += print_number(va_arg(arg, int), &i);
 			continue;
 		}
 		if (format[i] == '%' && format[i + 1] == '\0')
