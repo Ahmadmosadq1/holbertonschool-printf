@@ -16,6 +16,7 @@ int _printf(const char *format, ...)
 	char c;
 	va_list arg;
 	int printed = 0;
+	int int_i;
 
 	if (format == NULL)
 		return (-1);
@@ -31,9 +32,13 @@ int _printf(const char *format, ...)
 		if (format[i] == '%' && format[i + 1] == 's')
 		{
 			str = va_arg(arg, char *);
-			printed = printed + print_string(str);
+			printed += printed + print_string(str);
 			i += 2;
 			continue;
+		if (format[i] == "%" && format[i + 1] = "d")
+		{
+			int_i = va_arg(arg, int);
+			printed += print_int(int_i, &i)
 		}
 		if (format[i] == '%' && format[i + 1] == '%')
 		{
