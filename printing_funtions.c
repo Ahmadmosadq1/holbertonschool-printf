@@ -68,7 +68,7 @@ int print_number(int n)
 
 	do {
 		numStr[1++] = (number % 10) + '0';
-		nember /= 10;
+		number /= 10;
 	} while (number > 0);
 
 	while (i--)
