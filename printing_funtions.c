@@ -60,7 +60,7 @@ int print_number(int n)
 	{
 		write(1, "-", 1);
 		printed++;
-		number = -n;
+		number = (unsigned int)(-n);
 	}
 	else
 	{
