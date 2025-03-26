@@ -48,7 +48,7 @@ int print_number(int n)
 	int printed = 0;
 	int i = 0;
 	char numStr[12];
-	unsigned int number;
+	int number;
 	int temp;
 
 	if (n == 0)
@@ -60,7 +60,7 @@ int print_number(int n)
 	{
 		write(1, "-", 1);
 		printed++;
-		number = (unsigned int)(-n);
+		number = -n;
 	}
 	else
 	{
