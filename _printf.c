@@ -37,7 +37,7 @@ int _printf(const char *format, ...)
 			i += 2;
 			continue;
 		}
-		if (format[i] == '%' && (format[i + 1] == 'd' || format[i + i] == 'i'))
+		if (format[i] == '%' && (format[i + 1] == 'd' || format[i + 1] == 'i'))
 		{
 			printed += print_number(va_arg(arg, int));
 			i += 2;
