@@ -48,6 +48,7 @@ int print_number(int n)
 	char numStr[20];
 	int printed = 0;
 	int i = 0;
+	int conv_str;
 
 	if (n < 0)
 	{
@@ -55,7 +56,7 @@ int print_number(int n)
 		n = -n;
 	}
 
-	int conv_str = n;
+	conv_str = n;
 
 	while (conv_str > 0)
 	{
