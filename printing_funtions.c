@@ -50,6 +50,11 @@ int print_number(int n)
 	int i = 0;
 	int conv_str;
 
+	if (n == 0)
+	{
+		numStr[printed++] = '0';
+	}
+
 	if (n < 0)
 	{
 		numStr[printed++] = '-';
