@@ -55,7 +55,7 @@ int print_number(int n)
 		numStr[printed++] = '0';
 	}
 
-	if (n < 0)
+	else if (n < 0)
 	{
 		numStr[printed++] = '-';
 		n = -n;
