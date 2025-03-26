@@ -2,7 +2,6 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include "main.h"
-#include "main.h"
 /**
  * _printf - Entry point
  * Description: This function mimics the standard printf.
@@ -12,8 +11,6 @@
 int _printf(const char *format, ...)
 {
 	int i = 0;
-	char *str;
-	char c;
 	va_list arg;
 	int printed = 0;
 
@@ -24,14 +21,12 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%' && format[i + 1] == 'c')
 		{
-			c = va_arg(arg, int);
-			printed += print_char(c, &i);
+			printed += print_char(va_arg(arg, int), &i);
 			continue;
 		}
 		if (format[i] == '%' && format[i + 1] == 's')
 		{
-			str = va_arg(arg, char *);
-			printed = printed + print_string(str);
+			printed = printed + print_string(va_arg(arg, char *));
 			i += 2;
 			continue;
 		}
@@ -39,6 +34,12 @@ int _printf(const char *format, ...)
 		{
 			write(1, &format[i], 1);
 			printed++;
+			i += 2;
+			continue;
+		}
+		if (format[i] == '%' && (format[i + i] == 'd' || format[i + i] == 'i'))
+		{
+			printed += print_number(va_arg(arg, int));
 			i += 2;
 			continue;
 		}
