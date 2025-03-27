@@ -2,14 +2,16 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include "main.h"
+#include <stdlib.h>
 
 /**
  * print_string - Entry point
  * Description: This function prints a string for %s format.
  * @format: data type
+ * @i: an increment pointer.
  * Return: J
  */
-int print_string(char *format, int* i)
+int print_string(char *format, int *i)
 {
 	int j = 0;
 
@@ -41,15 +43,16 @@ int print_char(char c, int *i)
 /**
  * print_number - Prints an integer as a string.
  * @n: integer to print it.
+ * @i: incremant pointer
  * Return: total of number of characters printed.
  */
 
-int print_number(int n, int* i)
+int print_number(int n, int *i)
 {
 	int printed = 0;
 	int z = 0;
-	int j = 0;
-	char numStr[12];
+	int count = 0;
+	char numStr[12]; /*allocating memory by hardcoding*/
 	unsigned int  number;
 
 	if (n == 0)
@@ -72,12 +75,59 @@ int print_number(int n, int* i)
 		numStr[z++] = (number % 10) + '0';
 		number /= 10;
 		} while (number > 0);
-	
+
 	while (z--)
 	{
 		write(1, &numStr[z], 1);
-		printed += j;
+		printed += count;
 	}
 	*i += 2;
 	return (printed);
 }
+/**
+ * print_binary - converts decimal to binary.
+ * @n: integer to convert  it to binary.
+ * @i: a incremant  pointer
+ * Return: total of number of characters printed.
+ */
+
+int print_binary(unsigned int n, int *i)
+{
+	unsigned int temp = n;
+	int bits = 0;
+	int z = 0;
+	int count = 0;
+	char *numStr;
+	
+	while (temp > 0)
+	{
+		temp /= 2;
+		bits++;
+	}
+	if (n == 0)
+	{
+		write(1, "0", 1);
+		*i += 2;
+		return (1);
+	}
+
+	
+	numStr = (char *) malloc(bits * sizeof(char));/*allocate memory dynamically.*/
+	if (numStr == NULL)
+		return (-1);
+	do {
+		numStr[z++] = (n % 2) + '0';
+		n /= 2;
+	} while (n > 0);
+
+	while (z--)
+	{
+		write(1, &numStr[z], 1);
+		count++;
+	}
+	*i += 2;
+	free(numStr);
+	return (count);
+}
+
+
