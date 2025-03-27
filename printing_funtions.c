@@ -110,6 +110,7 @@ int print_binary(long int  n, int *i)
 	if (n < 0)
 	{
 		number = (unsigned long int)(-n);
+		number = ~number + 1;
 	}
 	else
 	{
