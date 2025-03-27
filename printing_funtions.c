@@ -137,10 +137,10 @@ int print_binary(long int  n, int *i)
 	while (z--)
 	{
 		write(1, &numStr[z], 1);
-		(*i)++;
+		count++;
 	}
 	free(numStr);
 	*i += 2;
-	return (*i);
+	return (count);
 }
 
