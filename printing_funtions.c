@@ -91,9 +91,9 @@ int print_number(int n, int *i)
  * Return: total of number of characters printed.
  */
 
-int print_binary(int n, int *i)
+int print_binary(unsigned int n, int *i)
 {
-	int temp = n;
+	unsigned int temp = n;
 	int bits = 0;
 	int z = 0;
 	int count = 0;
