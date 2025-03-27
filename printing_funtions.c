@@ -104,6 +104,13 @@ int print_binary(unsigned int n, int *i)
 		temp /= 2;
 		bits++;
 	}
+	if (n == 0)
+	{
+		write(1, "0", 1);
+		*i += 2;
+		return (-1);
+	}
+
 	
 	numStr = (char *) malloc(bits * sizeof(char));/*allocate memory dynamically.*/
 	if (numStr == NULL)
