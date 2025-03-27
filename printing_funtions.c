@@ -106,7 +106,7 @@ int print_binary(unsigned int n, int *i)
 	}
 	numStr = (char *) malloc(bits * sizeof(char));/*allocate memory dynamically.*/
 	if (numStr == NULL)
-		return (-1);
+		return (NULL);
 	do {
 		numStr[z++] = (n % 2) + '0';
 		n /= 2;
