@@ -98,11 +98,15 @@ int print_binary(unsigned int n, int *i)
 	int z = 0;
 	int count = 0;
 	char *numStr;
+	
+	if (n == 0)
+	{
 
 	while (temp > 0)
 	{
 		temp /= 2;
 		bits++;
+	}
 	}
 	numStr = (char *) malloc(bits * sizeof(char));/*allocate memory dynamically.*/
 	if (numStr == NULL)
