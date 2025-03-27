@@ -2,14 +2,16 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include "main.h"
+#include <stdlib.h>
 
 /**
  * print_string - Entry point
  * Description: This function prints a string for %s format.
  * @format: data type
+ * @i: an increment pointer.
  * Return: J
  */
-int print_string(char *format)
+int print_string(char *format, int *i)
 {
 	int j = 0;
 
@@ -20,6 +22,7 @@ int print_string(char *format)
 		j++;
 	}
 	write(1, format, j);
+	*i += 2;
 	return (j);
 }
 /**
@@ -40,15 +43,16 @@ int print_char(char c, int *i)
 /**
  * print_number - Prints an integer as a string.
  * @n: integer to print it.
+ * @i: incremant pointer
  * Return: total of number of characters printed.
  */
 
-int print_number(int n)
+int print_number(int n, int *i)
 {
 	int printed = 0;
-	int i = 0;
-	int j = 0;
-	char numStr[12];
+	int z = 0;
+	int count = 0;
+	char numStr[12]; /*allocating memory by hardcoding*/
 	unsigned int  number;
 
 	if (n == 0)
@@ -68,14 +72,51 @@ int print_number(int n)
 	}
 
 	do {
-		numStr[i++] = (number % 10) + '0';
+		numStr[z++] = (number % 10) + '0';
 		number /= 10;
 		} while (number > 0);
 
-	for (j = i - 1; j >= 0; j--)
+	while (z--)
 	{
-		write(1, &numStr[j], 1);
+		write(1, &numStr[z], 1);
+		printed += count;
 	}
-	printed += i;
+	*i += 2;
 	return (printed);
 }
+/**
+ * print_binary - converts decimal to binary.
+ * @n: integer to convert  it to binary.
+ * @i: a incremant  pointer
+ * Return: total of number of characters printed.
+ */
+
+int print_binary(int n, int *i)
+{
+	int temp = n;
+	int bits = 0;
+	int z = 0;
+	int count = 0;
+	char *numStr;
+
+	while (temp > 0)
+	{
+		temp /= 2;
+		bits++;
+	}
+	numStr = (char *) malloc(bits * sizeof(char));/*allocate memory dynamically.*/
+	do {
+		numStr[z++] = (n % 2) + '0';
+		n /= 2;
+	} while (n > 0);
+
+	while (z--)
+	{
+		write(1, &numStr[z], 1);
+		count++;
+	}
+	*i += 2;
+	return (count);
+}
+
+
