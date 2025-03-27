@@ -104,13 +104,12 @@ int print_binary(unsigned int  n, int *i)
 		temp /= 2;
 		bits++;
 	}
-	numStr = (char *) malloc(bits * sizeof(char));/*allocate memory dynamically.*/
-	
 	if (n == 0)
 	{
 		write( 1, "0", 1);
 		return(1);
 	}
+	numStr = (char *) malloc(bits * sizeof(char));/*allocate memory dynamically.*/
 	do {
 		numStr[z++] = (n % 2) + '0';
 		n /= 2;
@@ -122,6 +121,7 @@ int print_binary(unsigned int  n, int *i)
 		count++;
 	}
 	*i += 2;
+	free(numStr);
 	return (count);
 }
 
