@@ -125,8 +125,8 @@ int print_binary(unsigned long int  n, int *i)
 		write(1, &numStr[z], 1);
 		count++;
 	}
-	*i += 2;
 	free(numStr);
+	*i += 2;
 	return (count);
 }
 
