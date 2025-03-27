@@ -108,7 +108,7 @@ int print_binary(unsigned int n, int *i)
 	{
 		write(1, "0", 1);
 		*i += 2;
-		return (-1);
+		return (1);
 	}
 
 	
