@@ -107,15 +107,7 @@ int print_binary(long int  n, int *i)
 		return (1);
 	}
 
-	if (n < 0)
-	{
-		number = (unsigned long int)(-n);
-		number = ~number + 1;
-	}
-	else
-	{
-		number = (unsigned long int)n;
-	}
+	number = (n < 0) ? (unsigned long int)-n : (unsigned long int)n;
 
 	temp = number;
 	while (temp > 0)
