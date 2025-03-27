@@ -91,9 +91,9 @@ int print_number(int n, int *i)
  * Return: total of number of characters printed.
  */
 
-int print_binary(unsigned int  n, int *i)
+int print_binary(unsigned long int  n, int *i)
 {
-	int temp = n;
+	unsigned long int temp = n;
 	int bits = 0;
 	int z = 0;
 	int count = 0;
@@ -106,10 +106,15 @@ int print_binary(unsigned int  n, int *i)
 	}
 	if (n == 0)
 	{
-		write( 1, "0", 1);
-		return(1);
+		write(1, "0", 1);
+		*i += 2;
+		return (1);
 	}
 	numStr = (char *) malloc(bits * sizeof(char));/*allocate memory dynamically.*/
+
+	if (numStr == NULL)
+		return (-1);
+
 	do {
 		numStr[z++] = (n % 2) + '0';
 		n /= 2;
