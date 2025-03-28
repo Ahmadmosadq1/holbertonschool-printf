@@ -45,6 +45,21 @@ int _printf(const char *format, ...)
 			printed += print_binary(va_arg(arg, int), &i);
 			continue;
 		}
+		if (format[i] == '%' && format[i + 1] == 'u')
+		{
+			printed += print_unsigned(va_arg(arg, unsigned int), &i);
+			continue;
+		}
+		if (format[i] == '%' && format[i + 1] == 'o')
+		{
+			printed += print_octal(va_arg(arg, unsigned int), &i);
+			continue;
+		}
+		if (format[i] == '%' && (format[i + 1] == 'x' || format[i + 1] == 'X'))
+		{
+			printed += print_hexa(va_arg(arg, unsigned int), format[i + 1], &i);
+			continue;
+		}
 		if (format[i] == '%' && format[i + 1] == '\0')
 			return (-1);
 		write(1, &format[i], 1);
