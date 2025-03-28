@@ -11,19 +11,22 @@
  * @i: an increment pointer.
  * Return: J
  */
-int print_string(char *format, int *i)
+void print_string(char *format, int *i, char *buffer, int buff_count)
 {
 	int j = 0;
+	char *null_output;
+	int e = 0;
 
 	if (format == NULL)
-		format = "(null)";
+	{
+		while (null_output)
+			buffer[buff_count] = null_output[e];
+	}
 	while (format[j] != '\0')
 	{
-		j++;
+		buffer[buff_count++] = format[j];
 	}
-	write(1, format, j);
 	*i += 2;
-	return (j);
 }
 /**
  * print_char - Entry point
@@ -33,11 +36,10 @@ int print_string(char *format, int *i)
  * @i: increment i to skip %c.
  * Return: J
  */
-int print_char(char c, int *i)
+ void print_char(char c, int *i, char *buffer, int buff_count)
 {
-	write(1, &c, 1);
+	buffer[buff_count++] = c;
 	*i += 2;
-	return (1);
 }
 
 /**
@@ -47,23 +49,19 @@ int print_char(char c, int *i)
  * Return: total of number of characters printed.
  */
 
-int print_number(int n, int *i)
+void print_number(int n, int *i, char *buffer, buff_count)
 {
 	int printed = 0;
 	int z = 0;
 	int count = 0;
-	char numStr[12]; /*allocating memory by hardcoding*/
 	unsigned int  number;
+	int temp;
 
 	if (n == 0)
+		buffer[buff_count++] = '0';
+	if (n < 1)
 	{
-		write(1, "0", 1);
-		return (1);
-	}
-	if (n < 0)
-	{
-		write(1, "-", 1);
-		printed++;
+		buffer[buff_count] = '-';
 		number = (unsigned int)(-n);
 	}
 	else
@@ -72,17 +70,14 @@ int print_number(int n, int *i)
 	}
 
 	do {
-		numStr[z++] = (number % 10) + '0';
+		temp[z++] = (number % 10) + '0';
 		number /= 10;
 		} while (number > 0);
-
 	while (z--)
 	{
-		write(1, &numStr[z], 1);
-		printed += count;
+		 buffer[buff_count++] = temp[z];
 	}
 	*i += 2;
-	return (printed);
 }
 /**
  * print_binary - converts decimal to binary.
@@ -91,20 +86,35 @@ int print_number(int n, int *i)
  * Return: total of number of characters printed.
  */
 
-int print_binary(int n, int *i)
+void print_binary(unsigned int n, int *i, char *buffer, buff_count)
 {
-	int temp = n;
+	unsigned int temp = n;
 	int bits = 0;
 	int z = 0;
 	int count = 0;
 	char *numStr;
-
+	char *null_output = "(null)";
+	int e = 0;
+	
 	while (temp > 0)
 	{
 		temp /= 2;
 		bits++;
 	}
+	if (n == 0)
+	{
+		buffer[buff_count] = '0';
+		*i += 2;
+	}
+
+	
 	numStr = (char *) malloc(bits * sizeof(char));/*allocate memory dynamically.*/
+	if (numStr == NULL)
+	{
+		while (error_message[e])
+			buffer[buff_count++] = null_output[e];
+	}
+
 	do {
 		numStr[z++] = (n % 2) + '0';
 		n /= 2;
@@ -112,11 +122,10 @@ int print_binary(int n, int *i)
 
 	while (z--)
 	{
-		write(1, &numStr[z], 1);
-		count++;
+		buffer[buff_count++] = numStr[z];
 	}
 	*i += 2;
-	return (count);
+	free(nmStr);
 }
 
 
