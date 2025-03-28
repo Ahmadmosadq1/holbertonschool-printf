@@ -21,7 +21,7 @@ int print_nonPrintable(char *str, int *i)
 	{
 		if ((*str > 0 && *str < 32) || *str >= 127)
 		{
-			sprintf(hexa, "\\X%02X", (unsigned char)*str);
+			sprintf(hexa, "\\x%02X", (unsigned char)*str);
 			write(1, hexa, 4);
 			count++;
 		}
