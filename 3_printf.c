@@ -60,7 +60,7 @@ int _printf(const char *format, ...)
 			printed += print_hexa(va_arg(arg, unsigned int), format[i + 1], &i);
 			continue;
 		}
-		if (format[i] = '%' && format[i + 1] == 'S')
+		if (format[i] == '%' && format[i + 1] == 'S')
 		{
 			printed += print_nonPrintable(va_arg(arg, char *), &i);
 			continue;
