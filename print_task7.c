@@ -23,7 +23,17 @@ int print_nonPrintable(char *str, int *i)
 		{
 			sprintf(hexa, "\\x%02X", (unsigned char)*str);
 			write(1, hexa, 4);
-			count++;
+			count += 4; 
+		}
+		else if (*str == '\n')
+		{
+			write(1, "\\n", 2);
+			count += 2;
+		}
+		else if (*str == '\t')
+		{
+			write(1, '\\t', 2);
+			count += 2;
 		}
 		else
 		{
