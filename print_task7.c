@@ -31,5 +31,6 @@ int print_nonPrintable(char *str, int *i)
 		}
 		str++;
 	}
+	*i += 2;
 	return (count);
 }
