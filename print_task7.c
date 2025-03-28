@@ -32,7 +32,7 @@ int print_nonPrintable(char *str, int *i)
 		}
 		else if (*str == '\t')
 		{
-			write(1, '\\t', 2);
+			write(1, "\\t", 2);
 			count += 2;
 		}
 		else
