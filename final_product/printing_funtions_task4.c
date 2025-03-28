@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include "main.h"
+#include <stdlib.h>
 
 /**
  * print_unsigned - Prints an unsigned number.
@@ -9,24 +10,26 @@
  * Return: Number of characters printed.
  */
 
-int print_unsigned(unsigned int n, int *i)
+void print_unsigned(unsigned int n, int *i, char *buffer, int *buff_count)
 {
-	int count = 0;
-	char buffer[20];
-	int index = 0;
+	int z = 0;
+	char *numStr;
+	int temp = n;
+	int bits = 1;
 
+	while (temp > 0)
+		bits++;
+	numStr = malloc(bits * sizeof(char));
 	do {
-		buffer[index++] = (n % 10) + '0';
+		numStr[z++] = (n % 10) + '0';
 		n /= 10;
 	} while (n > 0);
 
-	while (index--)
+	while (z--)
 	{
-		write(1, &buffer[index], 1);
-		count++;
+		buffer[(*buff_count)++] = numStr[z];
 	}
 	*i += 2;
-	return (count);
 }
 
 /**
@@ -36,24 +39,27 @@ int print_unsigned(unsigned int n, int *i)
  * Return: Number of characters printed.
  */
 
-int print_octal(unsigned int n, int *i)
+void print_octal(unsigned int n, int *i, char *buffer, int *buff_count)
 {
-	int count = 0;
-	char buffer[20];
-	int index = 0;
+	int z = 0;
+	char *numStr;
+	int temp = n;
+	int bits = 0;
+
+	while (temp > 0)
+		bits++;
+	numStr = malloc(bits * sizeof(char));
 
 	do {
-		buffer[index++] = (n % 8) + '0';
+		numStr[z++] = (n % 8) + '0';
 		n /= 8;
 	} while (n > 0);
 
-	while (index--)
+	while (z--)
 	{
-		write(1, &buffer[index], 1);
-		count++;
+		buffer[(*buff_count)++] = numStr[z];
 	}
 	*i += 2;
-	return (count);
 }
 
 
@@ -65,33 +71,36 @@ int print_octal(unsigned int n, int *i)
  * Return: Number of characters printed.
  */
 
-int print_hexa(unsigned int n, char format, int *i)
+void print_hexa(unsigned int n, char format, int *i, char *buffer, int *buff_count)
 {
-	int count = 0;
-	char buffer[20];
-	int index = 0;
+	int z = 0;
 	int digit = 0;
 	char base_char;
+	char *numStr;
+	int temp = n;
+	int bits = 1;
 
 	if (format == 'X')
 		base_char = 'A';
 	else
 		base_char = 'a';
+	while (temp > 0)
+		bits++;
+	numStr = malloc(bits * sizeof(char));
 
 	do {
 		digit = n % 16;
 		if (digit < 10)
-			buffer[index++] = digit + '0';
+			numStr[z++] = digit + '0';
 		else
-			buffer[index++] = digit - 10 + base_char;
+			numStr[z++] = digit - 10 + base_char;
 		n /= 16;
 	} while (n > 0);
 
-	while (index--)
+	while (z--)
 	{
-		write(1, &buffer[index], 1);
-		count++;
+		(buffer[(*buff_count++)]) = numStr[z++];
+		
 	}
 	*i += 2;
-	return (count);
 }
