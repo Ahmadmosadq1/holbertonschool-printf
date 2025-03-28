@@ -12,7 +12,7 @@
 int print_unsigned(unsigned int n, int *i)
 {
 	int count = 0;
-	char buffer[];
+	char buffer[20];
 	int index = 0;
 
 	do {
@@ -39,7 +39,7 @@ int print_unsigned(unsigned int n, int *i)
 int print_octal(unsigned int n, int *i)
 {
 	int count = 0;
-	char buffer[];
+	char buffer[20];
 	int index = 0;
 
 	do {
@@ -68,7 +68,7 @@ int print_octal(unsigned int n, int *i)
 int print_hexa(unsigned int n, char format, int *i)
 {
 	int count = 0;
-	char buffer[];
+	char buffer[20];
 	int index = 0;
 	int digit = 0;
 	char base_char;
