@@ -1,7 +1,5 @@
-#include <stdio.h>
 #include <unistd.h>
 #include <stdarg.h>
-#include "main.h"
 #include "main.h"
 /**
  * _printf - Entry point
@@ -12,8 +10,6 @@
 int _printf(const char *format, ...)
 {
 	int i = 0;
-	char *str;
-	char c;
 	va_list arg;
 	int printed = 0;
 
@@ -24,15 +20,12 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%' && format[i + 1] == 'c')
 		{
-			c = va_arg(arg, int);
-			printed += print_char(c, &i);
+			printed += print_char(va_arg(arg, int), &i);
 			continue;
 		}
 		if (format[i] == '%' && format[i + 1] == 's')
 		{
-			str = va_arg(arg, char *);
-			printed = printed + print_string(str);
-			i += 2;
+			printed = printed + print_string(va_arg(arg, char *), &i);
 			continue;
 		}
 		if (format[i] == '%' && format[i + 1] == '%')
@@ -40,6 +33,31 @@ int _printf(const char *format, ...)
 			write(1, &format[i], 1);
 			printed++;
 			i += 2;
+			continue;
+		}
+		if (format[i] == '%' && (format[i + 1] == 'd' || format[i + 1] == 'i'))
+		{
+			printed += print_number(va_arg(arg, int), &i);
+			continue;
+		}
+		if (format[i] == '%' && format[i + 1] == 'b')
+		{
+			printed += print_binary(va_arg(arg, int), &i);
+			continue;
+		}
+		if (format[i] == '%' && format[i + 1] == 'u')
+		{
+			printed += print_unsigned(va_arg(arg, unsigned int), &i);
+			continue;
+		}
+		if (format[i] == '%' && format[i + 1] == 'o')
+		{
+			printed += print_octal(va_arg(arg, unsigned int), &i);
+			continue;
+		}
+		if (format[i] == '%' && (format[i + 1] == 'x' || format[i + 1] == 'X'))
+		{
+			printed += print_hexa(va_arg(arg, unsigned int), format[i + 1], &i);
 			continue;
 		}
 		if (format[i] == '%' && format[i + 1] == '\0')
