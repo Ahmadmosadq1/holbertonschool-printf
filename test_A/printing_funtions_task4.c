@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include "main.h"
+#include <stdlib.h>
 
 /**
  * print_unsigned - Prints an unsigned number.
@@ -9,10 +10,16 @@
  * Return: Number of characters printed.
  */
 
-void print_unsigned(unsigned int n, int *i, char *buffer, int buff_count)
+void print_unsigned(unsigned int n, int *i, char *buffer, int *buff_count)
 {
 	int z = 0;
 	char *numStr;
+	int temp = n;
+	int bits = 1;
+
+	while (temp > 0)
+		bits++;
+	numStr = malloc(bits * sizeof(char));
 	do {
 		numStr[z++] = (n % 10) + '0';
 		n /= 10;
@@ -20,7 +27,7 @@ void print_unsigned(unsigned int n, int *i, char *buffer, int buff_count)
 
 	while (z--)
 	{
-		buffer[buff_count++] = numStr[z];
+		buffer[(*buff_count)++] = numStr[z];
 	}
 	*i += 2;
 }
@@ -32,10 +39,16 @@ void print_unsigned(unsigned int n, int *i, char *buffer, int buff_count)
  * Return: Number of characters printed.
  */
 
-void print_octal(unsigned int n, int *i, char *buffer, int buff_count)
+void print_octal(unsigned int n, int *i, char *buffer, int *buff_count)
 {
 	int z = 0;
 	char *numStr;
+	int temp = n;
+	int bits = 0;
+
+	while (temp > 0)
+		bits++;
+	numStr = malloc(bits * sizeof(char));
 
 	do {
 		numStr[z++] = (n % 8) + '0';
@@ -44,7 +57,7 @@ void print_octal(unsigned int n, int *i, char *buffer, int buff_count)
 
 	while (z--)
 	{
-		buffer[buff_count] = numStr[z];
+		buffer[(*buff_count)++] = numStr[z];
 	}
 	*i += 2;
 }
@@ -58,16 +71,22 @@ void print_octal(unsigned int n, int *i, char *buffer, int buff_count)
  * Return: Number of characters printed.
  */
 
-void print_hexa(unsigned int n, char format, int *i, char *buffer, int buff_count)
+void print_hexa(unsigned int n, char format, int *i, char *buffer, int *buff_count)
 {
 	int z = 0;
 	int digit = 0;
 	char base_char;
+	char *numStr;
+	int temp = n;
+	int bits = 1;
 
 	if (format == 'X')
 		base_char = 'A';
 	else
 		base_char = 'a';
+	while (temp > 0)
+		bits++;
+	numStr = malloc(bits * sizeof(char));
 
 	do {
 		digit = n % 16;
@@ -80,6 +99,7 @@ void print_hexa(unsigned int n, char format, int *i, char *buffer, int buff_coun
 
 	while (z--)
 	{
+		(buffer[(*buff_count++)]) = numStr[z++];
 		
 	}
 	*i += 2;

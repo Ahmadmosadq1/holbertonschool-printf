@@ -11,20 +11,20 @@
  * @i: an increment pointer.
  * Return: J
  */
-void print_string(char *format, int *i, char *buffer, int buff_count)
+void print_string(char *format, int *i, char *buffer, int *buff_count)
 {
 	int j = 0;
-	char *null_output;
+	char *null_output = "(null)";
 	int e = 0;
 
 	if (format == NULL)
 	{
-		while (null_output)
-			buffer[buff_count] = null_output[e];
+		while (null_output[e])
+			buffer[(*buff_count)++] = null_output[e++];
 	}
 	while (format[j] != '\0')
 	{
-		buffer[buff_count++] = format[j];
+		buffer[(*buff_count)++] = format[j++];
 	}
 	*i += 2;
 }
@@ -36,9 +36,9 @@ void print_string(char *format, int *i, char *buffer, int buff_count)
  * @i: increment i to skip %c.
  * Return: J
  */
- void print_char(char c, int *i, char *buffer, int buff_count)
+ void print_char(char c, int *i, char *buffer, int *buff_count)
 {
-	buffer[buff_count++] = c;
+	buffer[(*buff_count)++] = c;
 	*i += 2;
 }
 
@@ -49,33 +49,45 @@ void print_string(char *format, int *i, char *buffer, int buff_count)
  * Return: total of number of characters printed.
  */
 
-void print_number(int n, int *i, char *buffer, int buff_count)
+void print_number(int n, int *i, char *buffer, int *buff_count)
 {
 	int z = 0;
-	unsigned int  number;
+	unsigned int number;
 	char *numStr;
+	int bits = 0;
+	int temp = n;
 
 	if (n == 0)
-		buffer[buff_count++] = '0';
+	{
+		buffer[(*buff_count)++] = '0';
+		return;
 	if (n < 1)
 	{
-		buffer[buff_count] = '-';
+		buffer[(*buff_count)++] = '-';
 		number = (unsigned int)(-n);
 	}
 	else
 	{
 		number = (unsigned int)(n);
 	}
+	while (temp > 0)
+	{
+		bits++;
+		temp /= 10;
+	}
 
+	numStr = (char *) malloc(bits * sizeof(char));
 	do {
 		numStr[z++] = (number % 10) + '0';
 		number /= 10;
 		} while (number > 0);
 	while (z--)
 	{
-		 buffer[buff_count++] = numStr[z];
+		 buffer[(*buff_count)++] = numStr[z];
 	}
-	*i += 2;
+	free(numStr);
+}
+*i += 2;
 }
 /**
  * print_binary - converts decimal to binary.
@@ -84,7 +96,7 @@ void print_number(int n, int *i, char *buffer, int buff_count)
  * Return: total of number of characters printed.
  */
 
-void print_binary(unsigned int n, int *i, char *buffer, int buff_count)
+void print_binary(unsigned int n, int *i, char *buffer, int *buff_count)
 {
 	unsigned int temp = n;
 	int bits = 0;
@@ -100,8 +112,8 @@ void print_binary(unsigned int n, int *i, char *buffer, int buff_count)
 	}
 	if (n == 0)
 	{
-		buffer[buff_count] = '0';
-		*i += 2;
+		buffer[(*buff_count)++] = '0';
+		return;
 	}
 
 	
@@ -109,7 +121,7 @@ void print_binary(unsigned int n, int *i, char *buffer, int buff_count)
 	if (numStr == NULL)
 	{
 		while (null_output[e])
-			buffer[buff_count++] = null_output[e];
+			buffer[(*buff_count)++] = null_output[e];
 	}
 
 	do {
@@ -119,10 +131,10 @@ void print_binary(unsigned int n, int *i, char *buffer, int buff_count)
 
 	while (z--)
 	{
-		buffer[buff_count++] = numStr[z];
+		buffer[(*buff_count)++] = numStr[z];
 	}
+	free (numStr);
 	*i += 2;
-	free(numStr);
 }
 
 
