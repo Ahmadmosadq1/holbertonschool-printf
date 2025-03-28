@@ -8,5 +8,6 @@ int print_binary(unsigned int n, int *i);
 int print_unsigned(unsigned int n, int *i);
 int print_octal(unsigned int n, int *i);
 int print_hexa(unsigned int n, char format, int *i);
+int print_nonPrintable(char *str, int *i);
 #endif
 
