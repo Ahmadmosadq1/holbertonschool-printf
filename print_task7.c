@@ -15,7 +15,7 @@ int print_nonPrintable(char *str, int *i)
 	int count = 0;
 	char hexa[5]; /* to store \x + tow hexa + \0*/
 
-	if (str == NULL)
+	if (!str)
 		str = "(null)";
 	while (*str)
 	{
