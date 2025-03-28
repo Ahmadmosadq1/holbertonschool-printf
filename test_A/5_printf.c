@@ -44,22 +44,22 @@ int _printf(const char *format, ...)
 		}
 		if (format[i] == '%' && format[i + 1] == 'b')
 		{
-			printed += print_binary(va_arg(arg, int), &i, buffer, buff_count);
+			print_binary(va_arg(arg, int), &i, buffer, buff_count);
 			continue;
 		}
 		if (format[i] == '%' && format[i + 1] == 'u')
 		{
-			printed += print_unsigned(va_arg(arg, unsigned int), &i, buffer, buff_count);
+			print_unsigned(va_arg(arg, unsigned int), &i, buffer, buff_count);
 			continue;
 		}
 		if (format[i] == '%' && format[i + 1] == 'o')
 		{
-			printed += print_octal(va_arg(arg, unsigned int), &i, buffer, buff_count);
+			print_octal(va_arg(arg, unsigned int), &i, buffer, buff_count);
 			continue;
 		}
 		if (format[i] == '%' && (format[i + 1] == 'x' || format[i + 1] == 'X'))
 		{
-			printed += print_hexa(va_arg(arg, unsigned int), format[i + 1], &i, buffer, buff_count);
+			print_hexa(va_arg(arg, unsigned int), format[i + 1], &i, buffer, buff_count);
 			continue;
 		}
 		if (format[i] == '%' && format[i + 1] == '\0')

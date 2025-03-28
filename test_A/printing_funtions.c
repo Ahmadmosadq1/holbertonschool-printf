@@ -49,13 +49,11 @@ void print_string(char *format, int *i, char *buffer, int buff_count)
  * Return: total of number of characters printed.
  */
 
-void print_number(int n, int *i, char *buffer, buff_count)
+void print_number(int n, int *i, char *buffer, int buff_count)
 {
-	int printed = 0;
 	int z = 0;
-	int count = 0;
 	unsigned int  number;
-	int temp;
+	char *numStr;
 
 	if (n == 0)
 		buffer[buff_count++] = '0';
@@ -70,12 +68,12 @@ void print_number(int n, int *i, char *buffer, buff_count)
 	}
 
 	do {
-		temp[z++] = (number % 10) + '0';
+		numStr[z++] = (number % 10) + '0';
 		number /= 10;
 		} while (number > 0);
 	while (z--)
 	{
-		 buffer[buff_count++] = temp[z];
+		 buffer[buff_count++] = numStr[z];
 	}
 	*i += 2;
 }
@@ -86,14 +84,13 @@ void print_number(int n, int *i, char *buffer, buff_count)
  * Return: total of number of characters printed.
  */
 
-void print_binary(unsigned int n, int *i, char *buffer, buff_count)
+void print_binary(unsigned int n, int *i, char *buffer, int buff_count)
 {
 	unsigned int temp = n;
 	int bits = 0;
 	int z = 0;
-	int count = 0;
 	char *numStr;
-	char *null_output = "(null)";
+	char null_output[8] = "(null)";
 	int e = 0;
 	
 	while (temp > 0)
@@ -111,7 +108,7 @@ void print_binary(unsigned int n, int *i, char *buffer, buff_count)
 	numStr = (char *) malloc(bits * sizeof(char));/*allocate memory dynamically.*/
 	if (numStr == NULL)
 	{
-		while (error_message[e])
+		while (null_output[e])
 			buffer[buff_count++] = null_output[e];
 	}
 
@@ -125,7 +122,7 @@ void print_binary(unsigned int n, int *i, char *buffer, buff_count)
 		buffer[buff_count++] = numStr[z];
 	}
 	*i += 2;
-	free(nmStr);
+	free(numStr);
 }
 
 
