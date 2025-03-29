@@ -22,10 +22,15 @@ int _printf(const char *format, ...)
 	va_start(arg, format);
 	while (format[i])
 	{
-		if (format[i] != '%')
-		 buffer[buff_count++] = format[i];
-		if (buff_count >= 1024 || format[i] == '\n')
+		if (buff_count >= 1023)
+		{
 			buff_checker(buffer, &buff_count, &total);
+		}
+		if (format[i] == '\n')
+		{
+			buffer[buff_count++] = format[i];
+			buff_checker(buffer, &buff_count, &total);
+		}
 		if (format[i] == '%' && format[i + 1] == 'c')
 		{
 			 print_char(va_arg(arg, int), &i, buffer, &buff_count, &total);
@@ -77,8 +82,9 @@ int _printf(const char *format, ...)
 		i++;
 	}
 	if (buff_count > 0)
-		write(1, buffer, buff_count);
-
+	{
+		buff_checker(buffer, &buff_count, &total);
+	}
 	printed += buff_count;
 	va_end(arg);
 	return (printed);
