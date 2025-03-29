@@ -11,7 +11,7 @@
  * @i: an increment pointer.
  * Return: J
  */
-void print_string(char *format, int *i, char *buffer, int *buff_count)
+void print_string(char *format, int *i, char *buffer, int *buff_count, int *total)
 {
 	int j = 0;
 	char *null_output = "(null)";
@@ -20,10 +20,14 @@ void print_string(char *format, int *i, char *buffer, int *buff_count)
 	if (format == NULL)
 	{
 		while (null_output[e])
+		{
+			buff_checker(buffer, buff_count, total);/*checking the size of the buffer*/
 			buffer[(*buff_count)++] = null_output[e++];
+		}
 	}
 	while (format[j] != '\0')
 	{
+		buff_checker(buffer, buff_count, total);
 		buffer[(*buff_count)++] = format[j++];
 	}
 	*i += 2;
@@ -36,8 +40,9 @@ void print_string(char *format, int *i, char *buffer, int *buff_count)
  * @i: increment i to skip %c.
  * Return: J
  */
- void print_char(char c, int *i, char *buffer, int *buff_count)
+ void print_char(char c, int *i, char *buffer, int *buff_count, int *total)
 {
+	buff_checker(buffer, buff_count, total);
 	buffer[(*buff_count)++] = c;
 	*i += 2;
 }
@@ -49,7 +54,7 @@ void print_string(char *format, int *i, char *buffer, int *buff_count)
  * Return: total of number of characters printed.
  */
 
-void print_number(int n, int *i, char *buffer, int *buff_count)
+void print_number(int n, int *i, char *buffer, int *buff_count, int *total)
 {
 	int z = 0;
 	unsigned int number;
@@ -59,10 +64,13 @@ void print_number(int n, int *i, char *buffer, int *buff_count)
 
 	if (n == 0)
 	{
+		buff_checker(buffer, buff_count, total);
 		buffer[(*buff_count)++] = '0';
 		return;
+	}
 	if (n < 1)
 	{
+		buff_checker(buffer, buff_count, total);
 		buffer[(*buff_count)++] = '-';
 		number = (unsigned int)(-n);
 	}
@@ -83,10 +91,11 @@ void print_number(int n, int *i, char *buffer, int *buff_count)
 		} while (number > 0);
 	while (z--)
 	{
-		 buffer[(*buff_count)++] = numStr[z];
+		buff_checker(buffer, buff_count, total);
+		buffer[(*buff_count)++] = numStr[z];
 	}
 	free(numStr);
-}
+
 *i += 2;
 }
 /**
@@ -96,7 +105,7 @@ void print_number(int n, int *i, char *buffer, int *buff_count)
  * Return: total of number of characters printed.
  */
 
-void print_binary(unsigned int n, int *i, char *buffer, int *buff_count)
+void print_binary(unsigned int n, int *i, char *buffer, int *buff_count, int *total)
 {
 	unsigned int temp = n;
 	int bits = 0;
@@ -112,6 +121,7 @@ void print_binary(unsigned int n, int *i, char *buffer, int *buff_count)
 	}
 	if (n == 0)
 	{
+		buff_checker(buffer, buff_count, total);
 		buffer[(*buff_count)++] = '0';
 		return;
 	}
@@ -121,7 +131,10 @@ void print_binary(unsigned int n, int *i, char *buffer, int *buff_count)
 	if (numStr == NULL)
 	{
 		while (null_output[e])
+		{
+			buff_checker(buffer, buff_count, total);
 			buffer[(*buff_count)++] = null_output[e];
+		}
 	}
 
 	do {
@@ -131,6 +144,7 @@ void print_binary(unsigned int n, int *i, char *buffer, int *buff_count)
 
 	while (z--)
 	{
+		buff_checker(buffer, buff_count, total);
 		buffer[(*buff_count)++] = numStr[z];
 	}
 	free (numStr);

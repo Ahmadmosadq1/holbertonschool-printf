@@ -10,7 +10,7 @@
  * Return: Number of characters printed.
  */
 
-void print_unsigned(unsigned int n, int *i, char *buffer, int *buff_count)
+void print_unsigned(unsigned int n, int *i, char *buffer, int *buff_count, int *total)
 {
 	int z = 0;
 	char *numStr;
@@ -27,6 +27,7 @@ void print_unsigned(unsigned int n, int *i, char *buffer, int *buff_count)
 
 	while (z--)
 	{
+		buff_checker(buffer, buff_count, total);
 		buffer[(*buff_count)++] = numStr[z];
 	}
 	*i += 2;
@@ -39,7 +40,7 @@ void print_unsigned(unsigned int n, int *i, char *buffer, int *buff_count)
  * Return: Number of characters printed.
  */
 
-void print_octal(unsigned int n, int *i, char *buffer, int *buff_count)
+void print_octal(unsigned int n, int *i, char *buffer, int *buff_count, int *total)
 {
 	int z = 0;
 	char *numStr;
@@ -57,6 +58,7 @@ void print_octal(unsigned int n, int *i, char *buffer, int *buff_count)
 
 	while (z--)
 	{
+		buff_checker(buffer, buff_count, total);
 		buffer[(*buff_count)++] = numStr[z];
 	}
 	*i += 2;
@@ -71,7 +73,7 @@ void print_octal(unsigned int n, int *i, char *buffer, int *buff_count)
  * Return: Number of characters printed.
  */
 
-void print_hexa(unsigned int n, char format, int *i, char *buffer, int *buff_count)
+void print_hexa(unsigned int n, char format, int *i, char *buffer, int *buff_count, int *total)
 {
 	int z = 0;
 	int digit = 0;
@@ -99,8 +101,11 @@ void print_hexa(unsigned int n, char format, int *i, char *buffer, int *buff_cou
 
 	while (z--)
 	{
+		buff_checker(buffer, buff_count, total);
 		(buffer[(*buff_count++)]) = numStr[z++];
 		
 	}
 	*i += 2;
 }
+
+

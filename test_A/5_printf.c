@@ -15,6 +15,7 @@ int _printf(const char *format, ...)
 	int printed = 0;
 	char buffer[1024];
 	int buff_count = 0;
+	int total = 0;
 
 	if (format == NULL)
 		return (-1);
@@ -23,12 +24,12 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%' && format[i + 1] == 'c')
 		{
-			 print_char(va_arg(arg, int), &i, buffer, &buff_count);
+			 print_char(va_arg(arg, int), &i, buffer, &buff_count, &total);
 			continue;
 		}
 		if (format[i] == '%' && format[i + 1] == 's')
 		{
-			print_string(va_arg(arg, char *), &i, buffer,&buff_count);
+			print_string(va_arg(arg, char *), &i, buffer,&buff_count, &total);
 			continue;
 		}
 		if (format[i] == '%' && format[i + 1] == '%')
@@ -39,27 +40,27 @@ int _printf(const char *format, ...)
 		}
 		if (format[i] == '%' && (format[i + 1] == 'd' || format[i + 1] == 'i'))
 		{
-			print_number(va_arg(arg, int), &i, buffer, &buff_count);
+			print_number(va_arg(arg, int), &i, buffer, &buff_count, &total);
 			continue;
 		}
 		if (format[i] == '%' && format[i + 1] == 'b')
 		{
-			print_binary(va_arg(arg, int), &i, buffer, &buff_count);
+			print_binary(va_arg(arg, int), &i, buffer, &buff_count, &total);
 			continue;
 		}
 		if (format[i] == '%' && format[i + 1] == 'u')
 		{
-			print_unsigned(va_arg(arg, unsigned int), &i, buffer, &buff_count);
+			print_unsigned(va_arg(arg, unsigned int), &i, buffer, &buff_count, &total);
 			continue;
 		}
 		if (format[i] == '%' && format[i + 1] == 'o')
 		{
-			print_octal(va_arg(arg, unsigned int), &i, buffer, &buff_count);
+			print_octal(va_arg(arg, unsigned int), &i, buffer, &buff_count, &total);
 			continue;
 		}
 		if (format[i] == '%' && (format[i + 1] == 'x' || format[i + 1] == 'X'))
 		{
-			print_hexa(va_arg(arg, unsigned int), format[i + 1], &i, buffer, &buff_count);
+			print_hexa(va_arg(arg, unsigned int), format[i + 1], &i, buffer, &buff_count, &total);
 			continue;
 		}
 		if (format[i] == '%' && format[i + 1] == '\0')
@@ -71,7 +72,10 @@ int _printf(const char *format, ...)
 
 		i++;
 	}
-	write(1, &buffer, buff_count);
+	write(1, buffer, buff_count);
+	if (buff_count > 0)
+		write(1, buffer, buff_count);
+
 	printed += buff_count;
 	va_end(arg);
 	return (printed);
