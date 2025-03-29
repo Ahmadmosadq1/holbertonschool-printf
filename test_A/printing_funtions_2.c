@@ -31,6 +31,7 @@ void print_unsigned(unsigned int n, int *i, char *buffer, int *buff_count, int *
 		buffer[(*buff_count)++] = numStr[z];
 	}
 	*i += 2;
+	free(numStr);
 }
 
 /**
@@ -62,6 +63,7 @@ void print_octal(unsigned int n, int *i, char *buffer, int *buff_count, int *tot
 		buffer[(*buff_count)++] = numStr[z];
 	}
 	*i += 2;
+	free(numStr);
 }
 
 
@@ -105,6 +107,7 @@ void print_hexa(unsigned int n, char format, int *i, char *buffer, int *buff_cou
 		(buffer[(*buff_count++)]) = numStr[z++];
 		
 	}
+	free(numStr);
 	*i += 2;
 }
 
